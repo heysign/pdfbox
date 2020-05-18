@@ -16,30 +16,23 @@
  */
 package org.apache.pdfbox.pdmodel.fdf;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.pdfbox.cos.COSArray;
-import org.apache.pdfbox.cos.COSBoolean;
-
-import org.apache.pdfbox.cos.COSDictionary;
-import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.cos.COSNumber;
-import org.apache.pdfbox.cos.COSStream;
+import org.apache.pdfbox.cos.*;
 import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.util.Hex;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import javax.xml.bind.DatatypeConverter;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * This represents a Stamp FDF annotation.
@@ -96,6 +89,23 @@ public class FDFAnnotationStamp extends FDFAnnotation
         String base64EncodedAppearance;
         try
         {
+            String imageData = xpath.evaluate("imagedata", element);
+            if (imageData != null && !imageData.isEmpty())
+            {
+                String base64String = imageData.substring(imageData.lastIndexOf("base64,") + 7);
+                byte[] decodedBytes = DatatypeConverter.parseBase64Binary(base64String);
+                COSStream stream = new COSStream();
+                OutputStream os = stream.createRawOutputStream();
+                os.write(decodedBytes);
+                IOUtils.closeQuietly(os);
+
+                COSDictionary dictionary = new COSDictionary();
+                // the N entry is required.
+                dictionary.setItem(COSName.N, new COSStream());
+                annot.setItem(COSName.XOBJECT, stream);
+                return;
+            }
+
             base64EncodedAppearance = xpath.evaluate("appearance", element);
         }
         catch (XPathExpressionException e)
