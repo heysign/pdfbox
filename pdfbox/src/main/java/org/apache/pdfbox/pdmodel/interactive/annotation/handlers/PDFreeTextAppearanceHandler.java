@@ -15,26 +15,21 @@
  */
 package org.apache.pdfbox.pdmodel.interactive.annotation.handlers;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.fontbox.util.Charsets;
 import org.apache.pdfbox.contentstream.operator.Operator;
 import org.apache.pdfbox.contentstream.operator.OperatorName;
-import org.apache.pdfbox.cos.COSArray;
-import org.apache.pdfbox.cos.COSBase;
-import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.cos.COSNumber;
-import org.apache.pdfbox.cos.COSObject;
+import org.apache.pdfbox.cos.*;
 import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdfparser.PDFStreamParser;
 import org.apache.pdfbox.pdmodel.PDAppearanceContentStream;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.FontMapper;
 import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.color.PDColor;
 import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceCMYK;
@@ -42,13 +37,19 @@ import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceGray;
 import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationMarkup;
-import static org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationLine.LE_NONE;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAppearanceStream;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDBorderEffectDictionary;
 import org.apache.pdfbox.pdmodel.interactive.annotation.layout.AppearanceStyle;
 import org.apache.pdfbox.pdmodel.interactive.annotation.layout.PlainText;
 import org.apache.pdfbox.pdmodel.interactive.annotation.layout.PlainTextFormatter;
 import org.apache.pdfbox.util.Matrix;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationLine.LE_NONE;
 
 public class PDFreeTextAppearanceHandler extends PDAbstractAppearanceHandler
 {
@@ -236,9 +237,13 @@ public class PDFreeTextAppearanceHandler extends PDAbstractAppearanceHandler
             float xOffset;
             float yOffset;
             float width = rotation == 90 || rotation == 270 ? borderBox.getHeight() : borderBox.getWidth();
-            // strategy to write formatted text is somewhat inspired by 
+            // strategy to write formatted text is somewhat inspired by
             // AppearanceGeneratorHelper.insertGeneratedAppearance()
-            PDFont font = PDType1Font.HELVETICA;
+            String ttfName = "/org/apache/pdfbox/resources/ttf/NanumGothic.ttf";
+            InputStream is = FontMapper.class.getResourceAsStream(ttfName);
+            PDFont font = PDType0Font.load(new PDDocument(), is, false);
+            //PDFont font = PDType1Font.HELVETICA;
+
             float clipY;
             float clipWidth = width - ab.width * 4;
             float clipHeight = rotation == 90 || rotation == 270 ? 
