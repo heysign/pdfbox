@@ -40,7 +40,7 @@ import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
 
 /**
  * A PDF annotation.
- * 
+ *
  * @author Ben Litchfield
  */
 public abstract class PDAnnotation implements COSObjectable
@@ -186,7 +186,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Constructor.
-     * 
+     *
      * @param dict The annotations dictionary.
      */
     public PDAnnotation(COSDictionary dict)
@@ -228,7 +228,7 @@ public abstract class PDAnnotation implements COSObjectable
      * The annotation rectangle, defining the location of the annotation on the page in default user space units. This
      * is usually required and should not return null on valid PDF documents. But where this is a parent form field with
      * children, such as radio button collections then the rectangle will be null.
-     * 
+     *
      * @return The Rect value of this annotation.
      */
     public PDRectangle getRectangle()
@@ -254,7 +254,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will set the rectangle for this annotation.
-     * 
+     *
      * @param rectangle The new rectangle values.
      */
     public void setRectangle(PDRectangle rectangle)
@@ -264,7 +264,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will get the flags for this field.
-     * 
+     *
      * @return flags The set of flags.
      */
     public int getAnnotationFlags()
@@ -274,7 +274,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will set the flags for this field.
-     * 
+     *
      * @param flags The new flags.
      */
     public void setAnnotationFlags(int flags)
@@ -284,7 +284,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Interface method for COSObjectable.
-     * 
+     *
      * @return This object as a standard COS object.
      */
     @Override
@@ -304,7 +304,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will set the annotations appearance state name.
-     * 
+     *
      * @param as The name of the appearance stream.
      */
     public void setAppearanceState(String as)
@@ -314,7 +314,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will get the appearance dictionary associated with this annotation. This may return null.
-     * 
+     *
      * @return This annotations appearance.
      */
     public PDAppearanceDictionary getAppearance()
@@ -329,7 +329,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will set the appearance associated with this annotation.
-     * 
+     *
      * @param appearance The appearance dictionary for this annotation.
      */
     public void setAppearance(PDAppearanceDictionary appearance)
@@ -368,7 +368,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the invisible flag.
-     * 
+     *
      * @return The invisible flag.
      */
     public boolean isInvisible()
@@ -378,7 +378,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the invisible flag.
-     * 
+     *
      * @param invisible The new invisible flag.
      */
     public void setInvisible(boolean invisible)
@@ -388,7 +388,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the hidden flag.
-     * 
+     *
      * @return The hidden flag.
      */
     public boolean isHidden()
@@ -398,7 +398,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the hidden flag.
-     * 
+     *
      * @param hidden The new hidden flag.
      */
     public void setHidden(boolean hidden)
@@ -408,7 +408,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the printed flag.
-     * 
+     *
      * @return The printed flag.
      */
     public boolean isPrinted()
@@ -418,7 +418,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the printed flag.
-     * 
+     *
      * @param printed The new printed flag.
      */
     public void setPrinted(boolean printed)
@@ -428,7 +428,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the noZoom flag.
-     * 
+     *
      * @return The noZoom flag.
      */
     public boolean isNoZoom()
@@ -438,7 +438,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the noZoom flag.
-     * 
+     *
      * @param noZoom The new noZoom flag.
      */
     public void setNoZoom(boolean noZoom)
@@ -448,7 +448,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the noRotate flag.
-     * 
+     *
      * @return The noRotate flag.
      */
     public boolean isNoRotate()
@@ -458,7 +458,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the noRotate flag.
-     * 
+     *
      * @param noRotate The new noRotate flag.
      */
     public void setNoRotate(boolean noRotate)
@@ -468,7 +468,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the noView flag.
-     * 
+     *
      * @return The noView flag.
      */
     public boolean isNoView()
@@ -478,7 +478,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the noView flag.
-     * 
+     *
      * @param noView The new noView flag.
      */
     public void setNoView(boolean noView)
@@ -488,7 +488,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the readOnly flag.
-     * 
+     *
      * @return The readOnly flag.
      */
     public boolean isReadOnly()
@@ -498,7 +498,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the readOnly flag.
-     * 
+     *
      * @param readOnly The new readOnly flag.
      */
     public void setReadOnly(boolean readOnly)
@@ -508,7 +508,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the locked flag.
-     * 
+     *
      * @return The locked flag.
      */
     public boolean isLocked()
@@ -518,7 +518,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the locked flag.
-     * 
+     *
      * @param locked The new locked flag.
      */
     public void setLocked(boolean locked)
@@ -528,7 +528,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the toggleNoView flag.
-     * 
+     *
      * @return The toggleNoView flag.
      */
     public boolean isToggleNoView()
@@ -538,7 +538,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the toggleNoView flag.
-     * 
+     *
      * @param toggleNoView The new toggleNoView flag.
      */
     public void setToggleNoView(boolean toggleNoView)
@@ -577,7 +577,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Get the "contents" of the field.
-     * 
+     *
      * @return the value of the contents.
      */
     public String getContents()
@@ -587,7 +587,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * Set the "contents" of the field.
-     * 
+     *
      * @param value the value of the contents.
      */
     public void setContents(String value)
@@ -597,7 +597,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will retrieve the date and time the annotation was modified.
-     * 
+     *
      * @return the modified date/time (often in date format, but can be an arbitrary string).
      */
     public String getModifiedDate()
@@ -632,7 +632,7 @@ public abstract class PDAnnotation implements COSObjectable
     /**
      * This will get the name, a string intended to uniquely identify each annotation within a page. Not to be confused
      * with some annotations Name entry which impact the default image drawn for them.
-     * 
+     *
      * @return The identifying name for the Annotation.
      */
     public String getAnnotationName()
@@ -643,7 +643,7 @@ public abstract class PDAnnotation implements COSObjectable
     /**
      * This will set the name, a string intended to uniquely identify each annotation within a page. Not to be confused
      * with some annotations Name entry which impact the default image drawn for them.
-     * 
+     *
      * @param nm The identifying name for the annotation.
      */
     public void setAnnotationName(String nm)
@@ -664,7 +664,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will set the key for this annotation in the structural parent tree.
-     * 
+     *
      * @param structParent The new key for this annotation.
      */
     public void setStructParent(int structParent)
@@ -733,29 +733,29 @@ public abstract class PDAnnotation implements COSObjectable
             border = new COSArray();
             border.add(COSInteger.ZERO);
             border.add(COSInteger.ZERO);
-            border.add(COSInteger.ONE);
+            border.add(COSInteger.ZERO);
         }
         return border;
     }
-    
+
     /**
      * This will set the border array.
-     * 
+     *
      * @param borderArray the border array to set.
      */
     public void setBorder(COSArray borderArray)
     {
         getCOSObject().setItem(COSName.BORDER, borderArray);
     }
-    
+
     /**
      * This will set the color used in drawing various elements. As of PDF 1.6 these are : Background of icon when
      * closed Title bar of popup window Border of a link annotation
-     * 
+     *
      * Colour is in DeviceRGB colourspace
-     * 
+     *
      * @param c colour in the DeviceRGB colourspace
-     * 
+     *
      */
     public void setColor(PDColor c)
     {
@@ -771,7 +771,7 @@ public abstract class PDAnnotation implements COSObjectable
      * </ul>
      *
      * @return Color object representing the colour
-     * 
+     *
      */
     public PDColor getColor()
     {
@@ -805,7 +805,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will retrieve the subtype of the annotation.
-     * 
+     *
      * @return the subtype
      */
     public String getSubtype()
@@ -815,7 +815,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will set the corresponding page for this annotation.
-     * 
+     *
      * @param page is the corresponding page
      */
     public void setPage(PDPage page)
@@ -825,7 +825,7 @@ public abstract class PDAnnotation implements COSObjectable
 
     /**
      * This will retrieve the corresponding page of this annotation.
-     * 
+     *
      * @return the corresponding page
      */
     public PDPage getPage()
@@ -842,7 +842,7 @@ public abstract class PDAnnotation implements COSObjectable
      * Create the appearance entry for this annotation. Not having it may prevent display in some
      * viewers. This method is for overriding in subclasses, the default implementation does
      * nothing.
-     * 
+     *
      * @param document
      */
     public void constructAppearances(PDDocument document)
@@ -853,10 +853,10 @@ public abstract class PDAnnotation implements COSObjectable
      * Create the appearance entry for this annotation. Not having it may prevent display in some
      * viewers. This method is for overriding in subclasses, the default implementation does
      * nothing.
-     * 
+     *
      */
     public void constructAppearances()
     {
     }
-    
+
 }
