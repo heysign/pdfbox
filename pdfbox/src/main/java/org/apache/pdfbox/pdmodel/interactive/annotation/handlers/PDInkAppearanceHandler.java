@@ -18,6 +18,8 @@ package org.apache.pdfbox.pdmodel.interactive.annotation.handlers;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -81,48 +83,37 @@ public class PDInkAppearanceHandler extends PDAbstractAppearanceHandler
             }
             cs.setLineWidth(ab.width);
 
+            List<Point2D.Double> pointList = new ArrayList<Point2D.Double>();
+            CubicSpline spline = new CubicSpline();
             for (float[] pathArray : ink.getInkList())
             {
-
                 int nPoints = pathArray.length / 2;
-                Point2D[] pathPoints = new Point2D.Double[nPoints];
-
                 // "When drawn, the points shall be connected by straight lines or curves
                 // in an implementation-dependent way" - we do lines.
                 for (int i = 0; i < nPoints; ++i)
                 {
                     int index = i * 2;
-
                     float x1 = pathArray[index];
                     float y1 = pathArray[index + 1];
-
-                    pathPoints[i] = new Point2D.Double(x1, y1);
-
+                    Point2D.Double point = new Point2D.Double(x1, y1);
+                    pointList.add(point);
+                    spline.addPoint(point);
                 }
-                if (pathPoints.length > 0) {
-                    BezierCurve bezierCurve = new BezierCurve(pathPoints);
-                    Point2D firstPathPoint = pathPoints[0];
-                    cs.moveTo((float) firstPathPoint.getX(), (float) firstPathPoint.getY());
 
-                    if (pathPoints.length > 1) {
-                        Point2D secondPathPoint = pathPoints[1];
-                        Point2D lastPathPoint = pathPoints[pathPoints.length - 1];
-                        Point2D firstControlPoint = bezierCurve.getPoint(0);
-                        Point2D lastControlPoint = bezierCurve.getPoint(bezierCurve.getPoints().length - 1);
-
-                        cs.curveTo2((float) firstControlPoint.getX(), (float) firstControlPoint.getY(), (float) secondPathPoint.getX(), (float) secondPathPoint.getY());
-
-                        for (int i = 2; i < pathPoints.length - 1; i++) {
-                            Point2D currentPathPoint = pathPoints[i];
-                            Point2D b0 = bezierCurve.getPoint(2 * i - 3);
-                            Point2D b1 = bezierCurve.getPoint(2 * i - 2);
-                            cs.curveTo((float) b0.getX(), (float) b0.getY(), (float) b1.getX(), (float) b1.getY(), (float) currentPathPoint.getX(), (float) currentPathPoint.getY());
+                if (pointList.size() > 2) {
+                    spline.calcSpline();
+                    for(float f = 0; f<=1; f+=0.01) {
+                        Point2D.Double p = spline.getPoint(f);
+                        Point2D.Double pnt = new Point2D.Double(p.x, p.y);
+                        System.out.println(pnt.toString());
+                        if (f >0){
+                            cs.lineTo((float)pnt.getX(), (float)pnt.getY());
+                        } else {
+                            cs.moveTo((float)pnt.getX(), (float)pnt.getY());
                         }
-
-                        cs.curveTo2((float) lastControlPoint.getX(), (float) lastControlPoint.getY(), (float) lastPathPoint.getX(), (float) lastPathPoint.getY());
                     }
+                    cs.stroke();
                 }
-                cs.stroke();
             }
         }
         catch (IOException ex)
