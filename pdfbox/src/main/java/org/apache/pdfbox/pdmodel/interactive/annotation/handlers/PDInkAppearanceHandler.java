@@ -105,11 +105,14 @@ public class PDInkAppearanceHandler extends PDAbstractAppearanceHandler
                     for(float f = 0; f<=1; f+=0.01) {
                         Point2D.Double p = spline.getPoint(f);
                         Point2D.Double pnt = new Point2D.Double(p.x, p.y);
-                        System.out.println(pnt.toString());
+                        System.out.print(f+":");
+//                        System.out.println(pnt.toString());
                         if (f >0){
                             cs.lineTo((float)pnt.getX(), (float)pnt.getY());
+                            System.out.println("lineTo:" +pnt.toString());
                         } else {
                             cs.moveTo((float)pnt.getX(), (float)pnt.getY());
+                            System.out.println("moveTo:" +pnt.toString());
                         }
                     }
                     cs.stroke();
