@@ -75,21 +75,27 @@ public class PDInkAppearanceHandler extends PDAbstractAppearanceHandler {
             cs.setLineWidth(ab.width);
 
             List<Point2D.Double> pointList = new ArrayList<Point2D.Double>();
-            CubicSpline spline = new CubicSpline();
+            List<CubicSpline> splineList  = new ArrayList<CubicSpline>();
+            int currentSplineIndex = -1;
             for (float[] pathArray : ink.getInkList()) {
                 int nPoints = pathArray.length / 2;
                 // "When drawn, the points shall be connected by straight lines or curves
                 // in an implementation-dependent way" - we do lines.
                 for (int i = 0; i < nPoints; ++i) {
-                    int index = i * 2;
-                    float x1 = pathArray[index];
-                    float y1 = pathArray[index + 1];
-                    Point2D.Double point = new Point2D.Double(x1, y1);
-                    pointList.add(point);
-                    spline.addPoint(point);
+                    float x = pathArray[i * 2];
+                    float y = pathArray[i * 2 + 1];
+
+                    if (i == 0)
+                    {
+                        CubicSpline spline = new CubicSpline();
+                        splineList.add(spline);
+                        currentSplineIndex++;
+                    }
+                    Point2D.Double point = new Point2D.Double(x, y);
+                    splineList.get(currentSplineIndex).addPoint(point);
                 }
 
-                if (pointList.size() > 2) {
+                for (CubicSpline spline : splineList){
                     spline.calcSpline();
                     Point2D.Double previousPoint1 = null;
                     Point2D.Double previousPoint2 = null;

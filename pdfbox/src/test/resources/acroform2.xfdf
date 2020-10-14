@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xfdf xmlns="http://ns.adobe.com/xfdf/" xml:space="preserve">
+  <pdf-info xmlns="http://www.pdftron.com/pdfinfo" version="2" import-version="3">
+    <ffield type="Btn" name="CHECK_115922880137730"><font name="Helvetica" /></ffield>
+    <ffield type="Tx" name="TEXT_115922880137781"/>
+    <ffield type="Sig" name="SIGNATURE_115922880137822"/>
+    <ffield type="Btn" name="CHECK_215922880619180"><font name="Helvetica" /></ffield>
+    <ffield type="Tx" name="TEXT_215922880619211"/>
+    <ffield type="Sig" name="SIGNATURE_215922880619252"/>
+    <widget appearance="Yes" field="CHECK_115922880137730" page="1">
+      <rect x1="59.168" x2="89.9846" y1="661.3374" y2="692.1541"/>
+      <border width="0" style="null"><color a="0" /></border>
+      <background-color r="204"
+        g="255"
+        b="204"/>
+      <appearances><aappearance name="Off" />
+        <aappearance name="Yes"/></appearances>
+    </widget>
+    <widget field="TEXT_115922880137781" page="1">
+      <rect x1="197.2265" x2="505.3929" y1="668.7334" y2="730.3667"/>
+      <border width="0" style="null"><color a="0" /></border>
+    </widget>
+    <widget appearance="_DEFAULT" field="SIGNATURE_115922880137822" page="1">
+      <rect x1="82.5886" x2="390.755" y1="496.1602" y2="557.7935"/>
+      <border width="0" style="null"><color a="0" /></border>
+      <appearances><aappearance name="_DEFAULT"><Normal>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjEuMWMqnEsAAAANSURBVBhXY/j//z8DAAj8Av6IXwbgAAAAAElFTkSuQmCC</Normal></aappearance></appearances>
+    </widget>
+    <widget appearance="Yes" field="CHECK_215922880619180" page="2">
+      <rect x1="61.6333" x2="92.4499" y1="269.3498" y2="300.1664"/>
+      <border width="0" style="null"><color a="0" /></border>
+      <background-color r="1"
+        g="1"
+        b="1"/>
+      <appearances><aappearance name="Off" />
+        <aappearance name="Yes"/></appearances>
+    </widget>
+    <widget field="TEXT_215922880619211" page="2">
+      <rect x1="179.9692" x2="488.1356" y1="232.3698" y2="294.0031"/>
+    </widget>
+    <widget appearance="_DEFAULT" field="SIGNATURE_215922880619252" page="2">
+      <rect x1="123.2666" x2="431.433" y1="86.9153" y2="148.5485"/>
+      <border width="0" style="null"><color a="0" /></border>
+      <appearances><aappearance name="_DEFAULT"><Normal>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjEuMWMqnEsAAAANSURBVBhXY/j//z8DAAj8Av6IXwbgAAAAAElFTkSuQmCC</Normal></aappearance></appearances>
+    </widget>
+  </pdf-info>
+  <fields>
+    <field name="CHECK_115922880137730"><value>Yes</value></field>
+    <field name="TEXT_115922880137781"><value>text1</value></field>
+    <field name="SIGNATURE_115922880137822"><value></value></field>
+    <field name="CHECK_215922880619180"><value>Yes</value></field>
+    <field name="TEXT_215922880619211"><value>text2</value></field>
+    <field name="SIGNATURE_215922880619252"><value></value></field>
+  </fields>
+  <annots>
+    <ink page="1" rect="82.588598,496.160247,276.079951,557.793529" color="#000000" flags="print"
+      name="23af5383-a6d2-59a9-e508-b2519b89928e" title="Guest" subject="Signature"
+      date="D:20200616151421+09'00'" creationdate="D:20200616151337+09'00'">
+      <inklist>
+        <gesture>85.21,536.1;85.21,536.1;85.21,536.51;88.11,539.42;98.06,546.05;101.8,547.29;105.94,548.12;108.01,548.12;108.01,548.12;107.6,544.39;103.45,535.27;88.11,507.49;83.55,497.12;124.19,505;146.58,521.17;174.77,541.49;179.33,543.98;186.8,548.95;188.46,549.78;185.14,547.71;177.68,541.49;159.85,525.32;156.11,521.17;153.63,518.27;153.21,516.61;161.92,516.61;178.09,521.17;212.09,534.03;222.04,538.59;227.85,541.49;233.65,544.81;233.65,544.81;230.75,544.81;211.26,541.9;198.82,536.93;195.09,534.44;188.87,529.46;188.46,527.81;190.53,526.15;204.21,525.32;211.26,526.15;221.21,531.95;227.43,542.32;227.85,546.47;221.63,553.51;202.14,556.83;180.99,556.42;171.04,553.93;161.92,550.61;160.68,549.37;161.5,547.71;184.72,537.76;205.04,533.61;218.31,532.37;236.14,532.37;241.53,534.03;243.6,534.86;244.02,535.27;236.97,540.25;219.56,543.98;205.04,544.39;201.31,544.39;199.65,543.56;205.04,537.76;219.14,529.88;239.46,522;261.85,514.54;267.24,513.29;271.39,512.46;273.87,512.05;274.7,512.05;275.12,512.46</gesture>
+      </inklist>
+    </ink>
+    <ink page="2" rect="123.266564,86.915254,211.536415,148.548536" color="#000000" flags="print"
+      name="affa9b1d-9ba4-3657-0108-ac0ff11f900a" title="Guest" subject="Signature"
+      date="D:20200616151454+09'00'" creationdate="D:20200616151448+09'00'">
+      <inklist>
+      <gesture>148.48,137.83;148.48,137.36;148.48,136.42;148.48,135.02;148.48,130.82;148.48,128.95;148.48,126.61;148.48,124.27;148.48,123.34;148.48,122.4;149.41,121.94;151.28,121.94;156.42,121;168.57,120.54;184.46,120.54;190.53,120.54;201.75,121.47;204.55,121.94;207.36,122.4;210.16,123.34;210.63,123.34;210.63,123.81;211.09,124.74;211.09,124.74;211.09,125.21;211.09,124.74;211.09,124.74;211.09,124.27;211.09,124.27;211.09,124.74;210.63,126.14;206.89,139.23;205.95,142.97;205.02,145.77;204.55,147.64;204.55,148.11;204.09,148.11;202.68,147.64;190.53,146.71;183.06,146.24;175.58,146.24;162.49,145.77;157.35,145.77;153.15,145.3;147.07,145.3;144.74,144.84;142.87,144.84;141.47,144.37;141.47,144.37;141,144.37</gesture>
+        <gesture>123.71,87.82;126.04,87.82;132.59,87.82;157.82,87.82;170.44,87.82;176.51,87.82;186.33,87.82;190.53,87.82;192.87,87.82;200.35,87.82;205.02,87.36</gesture>
+        <gesture>178.38,118.67;178.38,118.67;178.85,118.67;178.85,117.73;178.85,116.8;178.85,113.99;178.85,111.19;178.85,108.85;178.85,102.31;178.85,98.57;178.85,94.37</gesture>
+      </inklist>
+    </ink>
+  </annots>
+  <pages>
+    <defmtx matrix="1,0,0,-1,0,792"/>
+  </pages>
+</xfdf>
