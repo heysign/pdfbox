@@ -550,7 +550,7 @@ public class TestXFDF
             InputStream xfdfIs = this.getClass().getClassLoader().getResourceAsStream("acroform2.xfdf");
 //      String xfdf = "sample/acroform2.xfdf";
 //      File xfdfFile = new File(xfdf);
-            InputStream pdfIs = this.getClass().getClassLoader().getResourceAsStream("test.pdf");
+            InputStream pdfIs = this.getClass().getClassLoader().getResourceAsStream("merged.pdf");
             PDDocument document = PDDocument.load(pdfIs);
 
             String ttfName = "NanumGothic.ttf";
