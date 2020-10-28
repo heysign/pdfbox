@@ -67,6 +67,16 @@ public class FDFAnnotationStamp extends FDFAnnotation
         super(a);
     }
 
+    public final void setRotation(int rotation)
+    {
+      annot.setInt(COSName.ROTATE, rotation);
+    }
+
+    public String getRotation()
+  {
+    return annot.getString(COSName.ROTATE);
+  }
+
     /**
      * Constructor.
      *
@@ -84,6 +94,11 @@ public class FDFAnnotationStamp extends FDFAnnotation
         // appearance is only defined for stamps
         XPath xpath = XPathFactory.newInstance().newXPath();
 
+        String rotation = element.getAttribute("rotation");
+        if (rotation != null && !rotation.isEmpty())
+        {
+          setRotation(Integer.parseInt(rotation));
+        }
         // Set the Appearance to the annotation
         LOG.debug("Get the DOM Document for the stamp appearance");
         String base64EncodedAppearance;
@@ -158,14 +173,14 @@ public class FDFAnnotationStamp extends FDFAnnotation
 
         NodeList nodeList = appearanceXML.getChildNodes();
         String parentAttrKey = appearanceXML.getAttribute("KEY");
-        LOG.debug("Appearance Root - tag: " + appearanceXML.getTagName() + ", name: " + 
-                appearanceXML.getNodeName() + ", key: " + parentAttrKey + ", children: " + 
+        LOG.debug("Appearance Root - tag: " + appearanceXML.getTagName() + ", name: " +
+                appearanceXML.getNodeName() + ", key: " + parentAttrKey + ", children: " +
                 nodeList.getLength());
 
         // Currently only handles Appearance dictionary (AP key on the root)
         if (!"AP".equals(appearanceXML.getAttribute("KEY")))
         {
-            LOG.warn(parentAttrKey + " => Not handling element: " + appearanceXML.getTagName() + 
+            LOG.warn(parentAttrKey + " => Not handling element: " + appearanceXML.getTagName() +
                                      " with key: " + appearanceXML.getAttribute("KEY"));
             return dictionary;
         }
@@ -178,8 +193,8 @@ public class FDFAnnotationStamp extends FDFAnnotation
                 if ("STREAM".equalsIgnoreCase(child.getTagName()))
                 {
                     LOG.debug(parentAttrKey +
-                            " => Process " + child.getAttribute("KEY") + 
-                            " item in the dictionary after processing the " + 
+                            " => Process " + child.getAttribute("KEY") +
+                            " item in the dictionary after processing the " +
                             child.getTagName());
                     dictionary.setItem(child.getAttribute("KEY"), parseStreamElement(child));
                     LOG.debug(parentAttrKey + " => Set " + child.getAttribute("KEY"));
@@ -313,7 +328,7 @@ public class FDFAnnotationStamp extends FDFAnnotation
         }
         else if ("Matrix".equals(parentAttrKey) && nodeList.getLength() < 6)
         {
-            throw new IOException("Matrix does not have enough coordinates, only has: " + 
+            throw new IOException("Matrix does not have enough coordinates, only has: " +
                     nodeList.getLength());
         }
 

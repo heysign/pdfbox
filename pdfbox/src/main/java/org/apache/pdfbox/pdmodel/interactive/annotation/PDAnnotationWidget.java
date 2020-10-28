@@ -58,6 +58,26 @@ public class PDAnnotationWidget extends PDAnnotation
     }
 
     /**
+     * This will set the clockwise rotation in degrees.
+     *
+     * @param rotation The number of degrees of clockwise rotation.
+     */
+    public final void setRotation(int rotation)
+    {
+      getCOSObject().setInt(COSName.ROTATE, rotation);
+    }
+
+  /**
+   * This will get the clockwise rotation in degrees.
+   *
+   * @return The number of degrees of clockwise rotation.
+   */
+   public String getRotation()
+  {
+    return getCOSObject().getString(COSName.ROTATE);
+  }
+
+    /**
      * Returns the highlighting mode. Default value: <code>I</code>
      * <dl>
      * <dt><code>N</code></dt>
@@ -72,7 +92,7 @@ public class PDAnnotationWidget extends PDAnnotation
      * <dt><code>T</code></dt>
      * <dd>(Toggle) Same as <code>P</code> (which is preferred).</dd>
      * </dl>
-     * 
+     *
      * @return the highlighting mode
      */
     public String getHighlightingMode()
@@ -95,7 +115,7 @@ public class PDAnnotationWidget extends PDAnnotation
      * <dt><code>T</code></dt>
      * <dd>(Toggle) Same as <code>P</code> (which is preferred).</dd>
      * </dl>
-     * 
+     *
      * @param highlightingMode the highlighting mode the defined values
      */
     public void setHighlightingMode(String highlightingMode)
@@ -115,7 +135,7 @@ public class PDAnnotationWidget extends PDAnnotation
 
     /**
      * Returns the appearance characteristics dictionary.
-     * 
+     *
      * @return the appearance characteristics dictionary
      */
     public PDAppearanceCharacteristicsDictionary getAppearanceCharacteristics()
@@ -130,7 +150,7 @@ public class PDAnnotationWidget extends PDAnnotation
 
     /**
      * Sets the appearance characteristics dictionary.
-     * 
+     *
      * @param appearanceCharacteristics the appearance characteristics dictionary
      */
     public void setAppearanceCharacteristics(
@@ -156,7 +176,7 @@ public class PDAnnotationWidget extends PDAnnotation
 
     /**
      * Set the annotation action. As of PDF 1.6 this is only used for Widget Annotations
-     * 
+     *
      * @param action The annotation action.
      */
     public void setAction(PDAction action)
