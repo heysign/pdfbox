@@ -99,61 +99,69 @@ public class PDInkAppearanceHandler extends PDAbstractAppearanceHandler {
                     spline.calcSpline();
                     Point2D.Double previousPoint1 = null;
                     Point2D.Double previousPoint2 = null;
-                    for (float f = 0; f <= 1; f += 0.01) {
-                        Point2D.Double p = spline.getPoint(f);
-                        if (f > 0) {
-                            if (previousPoint1 != null && previousPoint2 != null) {
-                                double originalDiffX1 = p.getX() - previousPoint1.getX();
-                                double originalDiffY1 = p.getY() - previousPoint1.getY();
-                                double originalDiffX2 = previousPoint1.getX() - previousPoint2.getX();
-                                double originalDiffY2 = previousPoint1.getY() - previousPoint2.getY();
-                                double diffX1 = originalDiffX1;
-                                double diffY1 = originalDiffY1;
-                                if (diffX1 < 0) {
-                                    diffX1 *= -1;
-                                }
-                                if (diffY1 < 0) {
-                                    diffY1 *= -1;
-                                }
-                                if (diffX1 > 5 && diffY1 > 5) {
-                                    Point2D.Double tempPoint = new Point2D.Double(0, 0);
-                                    double nextOffsetX = originalDiffX1 / 5.0;
-                                    double nextOffsetY = originalDiffY1 / 5.0;
-                                    if (originalDiffX1 < 0 && originalDiffX2 > 0){
-                                        tempPoint.x = previousPoint1.getX() + nextOffsetX;
-                                    } else if (originalDiffX1 > 0 && originalDiffX2 < 0){
-                                        tempPoint.x = previousPoint1.getX() + nextOffsetX;
-                                    } else if (originalDiffX1 > 0 && originalDiffX2 > 0){
-                                        tempPoint.x = previousPoint1.getX() + nextOffsetX;
-                                    } else if (originalDiffX1 < 0 && originalDiffX2 < 0){
-                                        tempPoint.x = previousPoint1.getX() + nextOffsetX;
+                    if (spline.getPointsSize() > 1) {
+                        for (float f = 0; f <= 1; f += 0.01) {
+                            Point2D.Double p = spline.getPoint(f);
+                            if (f > 0) {
+                                if (previousPoint1 != null && previousPoint2 != null) {
+                                    double originalDiffX1 = p.getX() - previousPoint1.getX();
+                                    double originalDiffY1 = p.getY() - previousPoint1.getY();
+                                    double originalDiffX2 =
+                                        previousPoint1.getX() - previousPoint2.getX();
+                                    double originalDiffY2 =
+                                        previousPoint1.getY() - previousPoint2.getY();
+                                    double diffX1 = originalDiffX1;
+                                    double diffY1 = originalDiffY1;
+                                    if (diffX1 < 0) {
+                                        diffX1 *= -1;
                                     }
+                                    if (diffY1 < 0) {
+                                        diffY1 *= -1;
+                                    }
+                                    if (diffX1 > 5 && diffY1 > 5) {
+                                        Point2D.Double tempPoint = new Point2D.Double(0, 0);
+                                        double nextOffsetX = originalDiffX1 / 5.0;
+                                        double nextOffsetY = originalDiffY1 / 5.0;
+                                        if (originalDiffX1 < 0 && originalDiffX2 > 0) {
+                                            tempPoint.x = previousPoint1.getX() + nextOffsetX;
+                                        } else if (originalDiffX1 > 0 && originalDiffX2 < 0) {
+                                            tempPoint.x = previousPoint1.getX() + nextOffsetX;
+                                        } else if (originalDiffX1 > 0 && originalDiffX2 > 0) {
+                                            tempPoint.x = previousPoint1.getX() + nextOffsetX;
+                                        } else if (originalDiffX1 < 0 && originalDiffX2 < 0) {
+                                            tempPoint.x = previousPoint1.getX() + nextOffsetX;
+                                        }
 
-                                    if (originalDiffY1 < 0 && originalDiffY2 > 0){
-                                        tempPoint.y = previousPoint1.getY() + nextOffsetY;
-                                    } else if (originalDiffY1 > 0 && originalDiffY2 < 0){
-                                        tempPoint.y = previousPoint1.getY() + nextOffsetY;
-                                    } else if (originalDiffY1 > 0 && originalDiffY2 > 0){
-                                        tempPoint.y = previousPoint1.getY() + nextOffsetY;
-                                    } else if (originalDiffY1 < 0 && originalDiffY2 < 0){
-                                        tempPoint.y = previousPoint1.getY() + nextOffsetY;
-                                    }
-                                    if (tempPoint.getX() > 0) {
-                                        cs.lineTo((float) tempPoint.getX(), (float) tempPoint.getY());
-                                        LOG.debug(f + ":lineTo:" + tempPoint.toString());
+                                        if (originalDiffY1 < 0 && originalDiffY2 > 0) {
+                                            tempPoint.y = previousPoint1.getY() + nextOffsetY;
+                                        } else if (originalDiffY1 > 0 && originalDiffY2 < 0) {
+                                            tempPoint.y = previousPoint1.getY() + nextOffsetY;
+                                        } else if (originalDiffY1 > 0 && originalDiffY2 > 0) {
+                                            tempPoint.y = previousPoint1.getY() + nextOffsetY;
+                                        } else if (originalDiffY1 < 0 && originalDiffY2 < 0) {
+                                            tempPoint.y = previousPoint1.getY() + nextOffsetY;
+                                        }
+                                        if (tempPoint.getX() > 0) {
+                                            cs.lineTo((float) tempPoint.getX(),
+                                                (float) tempPoint.getY());
+                                            LOG.debug(f + ":lineTo:" + tempPoint.toString());
+                                        }
                                     }
                                 }
+                                cs.lineTo((float) p.getX(), (float) p.getY());
+                                LOG.debug(f + ":lineTo:" + p.toString());
+                            } else {
+                                cs.moveTo((float) p.getX(), (float) p.getY());
+                                LOG.debug("moveTo:" + p.toString());
                             }
-                            cs.lineTo((float) p.getX(), (float) p.getY());
-                            LOG.debug(f + ":lineTo:" + p.toString());
-                        } else {
-                            cs.moveTo((float) p.getX(), (float) p.getY());
-                            LOG.debug("moveTo:" + p.toString());
+                            if (previousPoint1 != null) {
+                                previousPoint2 = previousPoint1;
+                            }
+                            previousPoint1 = p;
                         }
-                        if (previousPoint1 != null){
-                            previousPoint2 = previousPoint1;
-                        }
-                        previousPoint1 = p;
+                    } else if (spline.getPointsSize() == 1) {
+                        Point2D.Double p = spline.getOriginalPoint(0);
+                        cs.lineTo((float) p.getX(), (float) p.getY());
                     }
                     cs.stroke();
                 }

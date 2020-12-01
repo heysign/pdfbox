@@ -61,6 +61,13 @@ public class CubicSpline {
         calcNaturalCubic(extractValues(points, PosField.Y), yCubics);
     }
 
+    public int getPointsSize(){
+        return this.points.size();
+    }
+
+    public Point2D.Double getOriginalPoint(int position){
+        return this.points.get(position);
+    }
     public Point2D.Double getPoint(float position) {
         position = position * xCubics.size();
         int cubicNum = (int) Math.min(xCubics.size() - 1, position);
@@ -71,6 +78,9 @@ public class CubicSpline {
     }
 
     public void calcNaturalCubic(List<Double> values, Collection<Cubic> cubics) {
+        if (values.size() < 2){
+            return;
+        }
         int num = values.size() - 1;
 
         double[] gamma = new double[num + 1];
