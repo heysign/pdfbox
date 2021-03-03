@@ -35,7 +35,7 @@
         The Apache PDFBox library is an open source Java tool for working with PDF documents.
     </description>
     <inceptionYear>2002</inceptionYear>
-    <version>2.0.22-instsign</version>
+    <version>2.0.22-heysign</version>
 
     <properties>
     	<git.scmJavadocUrl>git:https://git-wip-us.apache.org/repos/asf/pdfbox-docs//content/docs/${project.version}/javadocs</git.scmJavadocUrl>
@@ -474,7 +474,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>https://ipafont.ipa.go.jp/IPAfont/ipag00303.zip</url>
+                            <url>http://moji.or.jp/wp-content/ipafont/IPAfont/ipag00303.zip</url>
                             <outputDirectory>${project.build.directory}/fonts</outputDirectory>
                             <outputFileName>ipag00303.zip</outputFileName>
                             <unpack>true</unpack>
@@ -488,7 +488,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>https://ipafont.ipa.go.jp/IPAfont/ipagp00303.zip</url>
+                            <url>https://moji.or.jp/wp-content/ipafont/IPAfont/ipagp00303.zip</url>
                             <outputDirectory>${project.build.directory}/fonts</outputDirectory>
                             <outputFileName>ipagp00303.zip</outputFileName>
                             <unpack>true</unpack>
