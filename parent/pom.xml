@@ -531,4 +531,16 @@
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/maven/pom/tags/2.0.19/pdfbox-parent</developerConnection>
     <url>http://svn.apache.org/viewvc/maven/pom/tags/2.0.19/pdfbox-parent</url>
   </scm>
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>heysign-releases</name>
+            <url>http://maven.heysign.co.kr:8081/artifactory/libs-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>heysign-snapshots</name>
+            <url>http://maven.heysign.co.kr:8081/artifactory/libs-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
