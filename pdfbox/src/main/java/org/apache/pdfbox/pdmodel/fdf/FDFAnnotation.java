@@ -1030,4 +1030,15 @@ public abstract class FDFAnnotation implements COSObjectable
         return String.format("<%s%s>%s</%s>", node.getNodeName(), builder.toString(),
                 subString, node.getNodeName());
     }
+
+    public final void setCustomData(String subject)
+    {
+        annot.setString(COSName.CUSTOM_DATA, subject);
+    }
+
+    public String getCustomData()
+    {
+        return annot.getString(COSName.CUSTOM_DATA);
+    }
+
 }

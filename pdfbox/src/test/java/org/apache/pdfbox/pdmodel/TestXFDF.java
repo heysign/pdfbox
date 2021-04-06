@@ -628,4 +628,89 @@ public class TestXFDF
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void processRequesterInputWithValues() {
+        try {
+            String annotationAddedPdf = BASE_DIR + "annotationAdded.pdf";
+            String flattenedPdf = BASE_DIR + "flattened.pdf";
+            InputStream xfdfIs = this.getClass().getClassLoader().getResourceAsStream("requesterInputs.xfdf");
+            InputStream pdfIs = this.getClass().getClassLoader().getResourceAsStream("test.pdf");
+            PDDocument document = PDDocument.load(pdfIs);
+
+            String ttfName = "NanumGothic.ttf";
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream(ttfName);
+            PDFont font = PDType0Font.load(new PDDocument(), is, false);
+
+            PDPageTree pageTree = document.getPages();
+            PDAcroForm acroForm = document.getDocumentCatalog().getAcroForm();
+            if (acroForm == null) {
+                acroForm = new PDAcroForm(document);
+                String defaultAppearanceString = "/" + font.getName() + " 20 Tf 0 g";
+                acroForm.setDefaultAppearance(defaultAppearanceString);
+                document.getDocumentCatalog().setAcroForm(acroForm);
+            }
+
+            PDResources dr = acroForm.getDefaultResources();
+            if (dr == null) {
+                dr = new PDResources();
+                //dr.put(COSName.getPDFName("Helv"), PDType1Font.HELVETICA);
+                dr.put(COSName.getPDFName("NanumGothic"), font);
+                acroForm.setDefaultResources(dr);
+            }
+
+            loadXFDFAnnotationsAndFields(document, acroForm, xfdfIs);
+
+            List<PDField> fieldList = acroForm.getFields();
+            if (fieldList == null) {
+                fieldList = new ArrayList<PDField>();
+            }
+            if (fieldList.isEmpty()) {
+                PDSignatureField tempField = new PDSignatureField(acroForm);
+                tempField.setPartialName("TempField");
+                fieldList.add(tempField);
+            }
+            acroForm.setFields(fieldList);
+
+//            for(PDPage page : pageTree) {
+//                List<PDAnnotation> annotations = page.getAnnotations();
+//                for (PDAnnotation annot : xfdfAnnotationList) {
+//
+//                    if (PDAnnotationRubberStamp.SUB_TYPE.equals(annot.getSubtype())) {
+//                        PDAppearanceStream appearanceStream = annot.getNormalAppearanceStream();
+//                        PDRectangle rect = appearanceStream.getBBox();
+////                        log.debug(annot.getAnnotationName());
+////                        log.debug(rect);
+//                        rect.setLowerLeftX(0);
+//                        rect.setLowerLeftY(0);
+//                        appearanceStream.setBBox(rect);
+//                        annot.constructAppearances();
+//                    } else if (PDAnnotationMarkup.SUB_TYPE_INK.equals(annot.getSubtype())) {
+//                        annot.constructAppearances();
+//                    } else {
+//                        COSArray border = new COSArray();
+//                        border.add(COSInteger.ZERO);
+//                        border.add(COSInteger.ZERO);
+//                        border.add(COSInteger.ZERO);
+//                        annot.setBorder(border);
+//                        annot.constructAppearances();
+//                    }
+////                    log.debug(annot.getBorder());
+////                    log.debug(annot.getAnnotationName());
+////                    log.debug(annot.getSubtype());
+////                    annotations.add(annot);
+//                }
+//                page.setAnnotations(annotations);
+//
+//            }
+
+            document.save(annotationAddedPdf);
+            document.getDocumentCatalog().getAcroForm().flatten();
+            document.save(flattenedPdf);
+            document.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -146,89 +146,95 @@ public class FDFDictionary implements COSObjectable
                         {
 
                             // the node name defines the annotation type
-                            Element annot = (Element) annotNode;
-                            String annotationName = annot.getNodeName();
+                            Element annotationElement = (Element) annotNode;
+                            String annotationName = annotationElement.getNodeName();
                             try
                             {
+                                FDFAnnotation annotation = null;
                                 if (annotationName.equals("text"))
                                 {
-                                    annotList.add(new FDFAnnotationText(annot));
+                                    annotation = new FDFAnnotationText(annotationElement);
                                 }
                                 else if (annotationName.equals("caret"))
                                 {
-                                    annotList.add(new FDFAnnotationCaret(annot));
+                                    annotation = new FDFAnnotationCaret(annotationElement);
                                 }
                                 else if (annotationName.equals("freetext"))
                                 {
-                                    annotList.add(new FDFAnnotationFreeText(annot));
+                                    annotation = new FDFAnnotationFreeText(annotationElement);
                                 }
                                 else if (annotationName.equals("fileattachment"))
                                 {
-                                    annotList.add(new FDFAnnotationFileAttachment(annot));
+                                    annotation = new FDFAnnotationFileAttachment(annotationElement);
                                 }
                                 else if (annotationName.equals("highlight"))
                                 {
-                                    annotList.add(new FDFAnnotationHighlight(annot));
+                                    annotation = new FDFAnnotationHighlight(annotationElement);
                                 }
                                 else if (annotationName.equals("ink"))
                                 {
-                                    annotList.add(new FDFAnnotationInk(annot));
+                                    annotation = new FDFAnnotationInk(annotationElement);
                                 }
                                 else if (annotationName.equals("line"))
                                 {
-                                    annotList.add(new FDFAnnotationLine(annot));
+                                    annotation = new FDFAnnotationLine(annotationElement);
                                 }
                                 else if (annotationName.equals("link"))
                                 {
-                                    annotList.add(new FDFAnnotationLink(annot));
+                                    annotation = new FDFAnnotationLink(annotationElement);
                                 }
                                 else if (annotationName.equals("circle"))
                                 {
-                                    annotList.add(new FDFAnnotationCircle(annot));
+                                    annotation = new FDFAnnotationCircle(annotationElement);
                                 }
                                 else if (annotationName.equals("square"))
                                 {
-                                    annotList.add(new FDFAnnotationSquare(annot));
+                                    annotation = new FDFAnnotationSquare(annotationElement);
                                 }
                                 else if (annotationName.equals("polygon"))
                                 {
-                                    annotList.add(new FDFAnnotationPolygon(annot));
+                                    annotation = new FDFAnnotationPolygon(annotationElement);
                                 }
                                 else if (annotationName.equals("polyline"))
                                 {
-                                    annotList.add(new FDFAnnotationPolyline(annot));
+                                    annotation = new FDFAnnotationPolyline(annotationElement);
                                 }
                                 else if (annotationName.equals("sound"))
                                 {
-                                    annotList.add(new FDFAnnotationSound(annot));
+                                    annotation = new FDFAnnotationSound(annotationElement);
                                 }
                                 else if (annotationName.equals("squiggly"))
                                 {
-                                    annotList.add(new FDFAnnotationSquiggly(annot));
+                                    annotation = new FDFAnnotationSquiggly(annotationElement);
                                 }
                                 else if (annotationName.equals("stamp"))
                                 {
-                                    annotList.add(new FDFAnnotationStamp(annot));
+                                    annotation = new FDFAnnotationStamp(annotationElement);
                                 }
                                 else if (annotationName.equals("strikeout"))
                                 {
-                                    annotList.add(new FDFAnnotationStrikeOut(annot));
+                                    annotation = new FDFAnnotationStrikeOut(annotationElement);
                                 }
                                 else if (annotationName.equals("underline"))
                                 {
-                                    annotList.add(new FDFAnnotationUnderline(annot));
+                                    annotation = new FDFAnnotationUnderline(annotationElement);
                                 }
                                 else
                                 {
                                     LOG.warn("Unknown or unsupported annotation type '"
                                             + annotationName + "'");
                                 }
+                                if (annotation != null){
+                                    parseCustomDataForAnnotations(annotationElement, annotation);
+                                    annotList.add(annotation);
+                                }
+
                             }
                             catch (IOException e)
                             {
                                 LOG.warn(
                                         "Error parsing annotation information ["
-                                                + annot.getNodeValue() + "]. Annotation ignored", e);
+                                                + annotationElement.getNodeValue() + "]. Annotation ignored", e);
                             }
                         }
                     }
@@ -238,6 +244,17 @@ public class FDFDictionary implements COSObjectable
         }
     }
 
+
+    public void parseCustomDataForAnnotations(Element annotationElement, FDFAnnotation annotation){
+        for (int ci =0; ci < annotationElement.getChildNodes().getLength();ci++){
+            Node childNode = annotationElement.getChildNodes().item(ci);
+            if ("trn-custom-data".equals(childNode.getNodeName())){
+                Node bytesNode = childNode.getAttributes().getNamedItem("bytes");
+                String value = bytesNode.getNodeValue();
+                annotation.setCustomData(value);
+            }
+        }
+    }
     /**
      * This will write this element as an XML document.
      *

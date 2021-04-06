@@ -56,6 +56,7 @@ public final class COSName extends COSBase implements Comparable<COSName>
     public static final COSName ADOBE_PPKLITE = new COSName("Adobe.PPKLite");
     public static final COSName AESV2 = new COSName("AESV2");
     public static final COSName AESV3 = new COSName("AESV3");
+    public static final COSName CUSTOM_DATA = new COSName("CustomData");
     public static final COSName AFTER = new COSName("After");
     public static final COSName AIS = new COSName("AIS");
     public static final COSName ALL_OFF = new COSName("AllOff");
